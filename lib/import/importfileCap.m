@@ -28,7 +28,7 @@ opts.DataLines = dataLines;
 opts.Delimiter = ",";
 
 % Specify column names and types
-opts.VariableNames = ["Time", "Cap1","Cap2", "Cap3", "Cap4", "Cap5", "Cap6", "Cap7", "Cap8", "Cap9","Cap10", "Cap11", "Cap12", "Cap13","Cap14", "Cap15", "Cap16"];
+opts.VariableNames = ["Time", "Cap1", "Cap2", "Cap3", "Cap4", "Cap5", "Cap6", "Cap7", "Cap8", "Cap9","Cap10", "Cap11", "Cap12", "Cap13","Cap14", "Cap15", "Cap16"];
 opts.VariableTypes = ["double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
 
 % Specify file level properties

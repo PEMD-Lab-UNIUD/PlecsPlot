@@ -1,23 +1,23 @@
-function Options = plotOptions()
+function Options = plotOptions_V2()
 %plotOptions gives a structure with all the Options fields
 
-    Options.DPI  = 300;
-    Options.Units = 'centimeters';
-    Options.Width = 20;
-    Options.Height = 12;
+    Options.DPI  = 400;
+    Options.Units = 'normalized';
+    Options.Width = 1;
+    Options.Height = 1;
 
-    Options.LineWidth = 1;
-    Options.Line2Width = 3;
+    Options.LineWidth = 3;
+    Options.Line2Width = 5;
 
 %     Options.FontSizeTitle = 18;
 %     Options.FontSizeTick = 13;
 %     Options.FontSizeLabel = 14;
 %     Options.FontSizeLegend = 10;
 
-    Options.FontSizeTitle = 14;
-    Options.FontSizeTick = 10;
-    Options.FontSizeLabel = 12;
-    Options.FontSizeLegend = 8;
+    Options.FontSizeTitle = 30;
+    Options.FontSizeTick = 20;
+    Options.FontSizeLabel = 24;
+    Options.FontSizeLegend = 20;
 
     Options.VlineStyle = '--';
     Options.VlineColor = 'k';

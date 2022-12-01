@@ -3,17 +3,43 @@ function PLECSplot(Plot, Options)
 %   Detailed explanation goes here
 
     for i=1:width(Plot.Datay)
-        p(i) = plot(Plot.Datax(:,i), Plot.Datay(:,i), '-');
+        p(i) = plot(Plot.Datax(:,i), Plot.Datay(:,i));
+
+        if isfield(Plot,'Color')
+            p(i).Color = Plot.Color(i);
+        else
+            p(i).Color = Options.Color.Default(mod(i-1,length(Options.Color.Default))+1);
+        end
+        if isfield(Plot,'Style')
+            p(i).LineStyle = Plot.Style(i);
+        end
         p(i).LineWidth = Options.LineWidth;
-        p(i).Color = Options.Color(i);
+        if isfield(Plot, 'Marker')
+            p(i).Marker = Plot.Marker(i);
+        end
         hold on; 
     end
 
     grid on; grid minor;
 
-    
 
-    ax = gca; 
+ ax = gca; 
+
+%     fig = gcf;
+% ax = fig.CurrentAxes;
+
+    if isfield(Plot,'Note')
+%         [normx, normy] = coord2norm(ax, Plot.Note.XPosition, Plot.Note.YPosition);
+%         an = annotation(Plot.Note.Type, normx, normy, 'String', Plot.Note.Text);
+%         note = Annotate(ax, Plot.Note.Type, Plot.Note.XPosition, Plot.Note.YPosition, 'string', Plot.Note.Text);
+% for i=1:length(Plot.Note.XPosition)
+%  [normx(i), normy(i)] = normalize_coordinate(Plot.Note.XPosition(i), Plot.Note.YPosition(i), ax, get(gca, 'xlim'), get(gca, 'ylim'), 0, 0);
+% end
+%        an = annotation(Plot.Note.Type, normx, normy, 'String', Plot.Note.Text);
+
+% an = xyannotation(ax,'arrow', Plot.Note.XPosition, Plot.Note.YPosition)
+    end 
+
     if isfield(Plot,'XLim')
         ax.XLim = Plot.XLim;
     end
@@ -41,8 +67,11 @@ function PLECSplot(Plot, Options)
     end 
 
     if isfield(Plot,'XTick')
-%         xtick = xticks(Plot.XTick);
         ax.XTick = Plot.XTick;
+    end
+
+    if isfield(Plot,'YTick')
+        ax.YTick = Plot.YTick;
     end
 
     if isfield(Plot,'XTickLabel')

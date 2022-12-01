@@ -23,26 +23,35 @@ ImageTitle = "CapAmplitudes";
 ImageTitle = DirectoryFigure+ImageTitle;
 
 %% PLOT 1
-Plot1.FigureTitle = "Phase A - upper Sub-arm upper Arm SMs Voltage Amplitude";
+Plot1.FigureTitle = "Phase A - upper sub-arm upper Arm SMs Voltage Amplitude";
 Plot1.Ylabel = "Voltage [V]";
 Plot1.Xlabel = '';
 Plot1.XTickLabel = '';
 Plot1.Datay = [DATA.Cap1 DATA.Cap2 DATA.Cap3 DATA.Cap4];
 Plot1.Datax = [DATA.Time DATA.Time DATA.Time DATA.Time];
+Plot1.Color = [Options.Color.Green Options.Color.Green Options.Color.Green Options.Color.Green];
+% Plot1.Style = [Options.Style.Line Options.Style.Dashed Options.Style.Dashed Options.Style.DashDot];
 Plot1.XLim = [0 0.8];
 Plot1.YLim = [90 110];
 % Plot1.Vline = [0.1 0.25];
 % Plot1.VlineLim = [90 110];
 % Plot1.Hline = [95 105];
 % Plot1.HlineLim = [0 0.8];
+% Plot1.Note.Type= 'textarrow';
+% Plot1.Note.XPosition = [0.4 0.5];
+% Plot1.Note.YPosition = [100 105];
+% Plot1.Note.Text = 'test';
 
 %% PLOT 2
-Plot2.FigureTitle = "Phase A - lowrer Sub-arm upper Arm SMs Voltage Amplitude";
+Plot2.FigureTitle = "Phase A - lower sub-arm upper Arm SMs Voltage Amplitude";
 Plot2.Ylabel = "Voltage [V]";
 Plot2.Xlabel = '';
 Plot2.XTickLabel = '';
 Plot2.Datay = [DATA.Cap5 DATA.Cap6 DATA.Cap7 DATA.Cap8];
 Plot2.Datax = [DATA.Time DATA.Time DATA.Time DATA.Time];
+Plot2.Color = [Options.Color.Green Options.Color.Green Options.Color.Green Options.Color.Green];
+% Plot2.Style = [Options.Style.Line Options.Style.Dashed Options.Style.Dashed Options.Style.None];
+% Plot2.Marker = [Options.Marker.Circle Options.Marker.Cross Options.Marker.None Options.Marker.Square];
 Plot2.XLim = [0 0.8];
 Plot2.YLim = [90 110];
 % Plot2.Vline = [0.1 0.25];
@@ -51,12 +60,14 @@ Plot2.YLim = [90 110];
 % Plot2.HlineLim = [0 0.8];
 
 %% PLOT 3
-Plot3.FigureTitle = "Phase A - upper Sub-arm lower Arm SMs Voltage Amplitude";
+Plot3.FigureTitle = "Phase A - upper sub-arm lower Arm SMs Voltage Amplitude";
 Plot3.Ylabel = "Voltage [V]";
 Plot3.Xlabel = '';
 Plot3.XTickLabel = '';
 Plot3.Datay = [DATA.Cap9 DATA.Cap10 DATA.Cap11 DATA.Cap12];
 Plot3.Datax = [DATA.Time DATA.Time  DATA.Time  DATA.Time];
+Plot3.Color = [Options.Color.Green Options.Color.Green Options.Color.Green Options.Color.Green];
+% Plot3.Style = [Options.Style.Line Options.Style.Dashed Options.Style.Dashed Options.Style.Dotted];
 Plot3.XLim = [0 0.8];
 Plot3.YLim = [90 110];
 % Plot3.Vline = [0.1 0.25];
@@ -65,11 +76,13 @@ Plot3.YLim = [90 110];
 % Plot3.HlineLim = [0 0.8];
 
 %% PLOT 4
-Plot4.FigureTitle = "Phase A - lower Sub-arm lower Arm SMs Voltage Amplitude";
+Plot4.FigureTitle = "Phase A - lower sub-arm lower Arm SMs Voltage Amplitude";
 Plot4.Ylabel = "Voltage [V]";
-Plot4.Xlabel = 'Time [ms]';
+Plot4.Xlabel = 'Time [s]';
 Plot4.Datay = [DATA.Cap13 DATA.Cap14 DATA.Cap15 DATA.Cap16];
 Plot4.Datax = [DATA.Time  DATA.Time  DATA.Time  DATA.Time];
+Plot4.Color = [Options.Color.Green Options.Color.Green Options.Color.Green Options.Color.Green];
+% Plot4.Style = [Options.Style.Line Options.Style.Dashed Options.Style.Dashed Options.Style.Dotted];
 Plot4.XLim = [0 0.8];
 Plot4.YLim = [90 110];
 % Plot4.Vline = [0.1 0.25];
@@ -91,8 +104,8 @@ PLECSplot(Plot3, Options)
 nexttile;
 PLECSplot(Plot4, Options)
 
-
+set(gcf, 'WindowState', 'maximized');
 
 %% SAVE
-set(gcf, 'WindowState', 'maximized');
-plot2file(figure1, Options, ImageTitle);
+% 
+% plot2file(figure1, Options, ImageTitle);

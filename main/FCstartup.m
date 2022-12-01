@@ -19,7 +19,7 @@ Options = plotOptions();
 
 %% PLOT TO FILE
 DirectoryFigure = "..\Fig\";
-ImageTitle = "Flying Capacitor startup";
+ImageTitle = "FlyingCapacitorPCapec";
 ImageTitle = DirectoryFigure+ImageTitle;
 
 %% PLOT 1
@@ -68,8 +68,94 @@ PLECSplot(Plot1, Options)
 nexttile;
 PLECSplot(Plot2, Options)
 
+set(gcf, 'WindowState', 'maximized');
+
+%% First Plot
+
+dim = 0.03;
+% Create textbox
+ya = 0.21;   % 0.205; prima
+x1 = 0.03;
+x2a = 0.05;
+x2b = 0.08;
+
+
+annotation(figure1,'textbox', [x1 ya dim dim], 'String','A', 'LineStyle','none','FontName','Palatino Linotype', 'FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+
+% Create textbox
+annotation(figure1,'textbox', [x2a ya dim dim], 'String','B1', 'LineStyle','none', 'FontName','Palatino Linotype','FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+
+% Create textbox
+annotation(figure1,'textbox', [x2b ya dim dim], 'String','B2', 'LineStyle','none', 'FontName','Palatino Linotype', 'FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+
+x2a = 0.05+0.06;
+x2b = 0.08+0.06;
+
+% Create textbox
+annotation(figure1,'textbox', [x2a ya dim dim], 'String','B1', 'LineStyle','none', 'FontName','Palatino Linotype','FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+
+% Create textbox
+annotation(figure1,'textbox', [x2b ya dim dim], 'String','B2', 'LineStyle','none', 'FontName','Palatino Linotype', 'FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+
+x2a = 0.05+0.12;
+x2b = 0.08+0.12;
+x3 = 0.08+0.12+0.042;
+% Create textbox
+annotation(figure1,'textbox', [x2a ya dim dim], 'String','B1', 'LineStyle','none', 'FontName','Palatino Linotype','FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+
+% Create textbox
+annotation(figure1,'textbox', [x2b ya dim dim], 'String','B2', 'LineStyle','none', 'FontName','Palatino Linotype', 'FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+
+% Create textbox
+annotation(figure1,'textbox', [x3 ya dim dim], 'String','C', 'LineStyle','none', 'FontName','Palatino Linotype', 'FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+
+%% Second Plot
+
+dim = 0.025;% 5 25 prima
+% Create textbox
+ya = 0.035;
+x1 = 0.03;
+x2a = 0.05;
+x2b = 0.08;
+
+
+annotation(figure1,'textbox', [x1 ya dim dim], 'String','A', 'LineStyle','none','FontName','Palatino Linotype', 'FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+% Create textbox
+annotation(figure1,'textbox', [x2a ya dim dim], 'String','B1', 'LineStyle','none', 'FontName','Palatino Linotype','FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+% Create textbox
+annotation(figure1,'textbox', [x2b ya dim dim], 'String','B2', 'LineStyle','none', 'FontName','Palatino Linotype', 'FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+x2a = 0.05+0.06;
+x2b = 0.08+0.06;
+
+% Create textbox
+annotation(figure1,'textbox', [x2a ya dim dim], 'String','B1', 'LineStyle','none', 'FontName','Palatino Linotype','FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+% Create textbox
+annotation(figure1,'textbox', [x2b ya dim dim], 'String','B2', 'LineStyle','none', 'FontName','Palatino Linotype', 'FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+x2a = 0.05+0.12;
+x2b = 0.08+0.12;
+x3 = 0.08+0.12+0.042;
+% Create textbox
+annotation(figure1,'textbox', [x2a ya dim dim], 'String','B1', 'LineStyle','none', 'FontName','Palatino Linotype','FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+% Create textbox
+annotation(figure1,'textbox', [x2b ya dim dim], 'String','B2', 'LineStyle','none', 'FontName','Palatino Linotype', 'FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
+
+% Create textbox
+annotation(figure1,'textbox', [x3 ya dim dim], 'String','C', 'LineStyle','none', 'FontName','Palatino Linotype', 'FontWeight', 'bold', 'FontSize', 14, 'FitBoxToText','off');
 
 %% SAVE
-set(gcf, 'WindowState', 'maximized');
 
 plot2file(figure1, Options, ImageTitle);

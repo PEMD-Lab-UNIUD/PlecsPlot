@@ -11,7 +11,7 @@ if exist(filenameMAT) == 2 %se esiste lo carico
 else % se no lo devo importare 
    disp ('File NOT found');
    DATA = importfileHFamp(filenameCSV);
-   metadata = dir(filenameCSV)
+   metadata = dir(filenameCSV);
    save(filenameMAT, 'metadata', 'DATA');
 end
 
@@ -40,16 +40,18 @@ Plot1.NumColumns = 1;
 Plot1.Datay = [DATA.UhxAmp];
 Plot1.Datax = [DATA.Time];
 Plot1.XTickLabel = '';
+Plot1.XLim = [0 0.8];
 
 %% PLOT 2
 Plot2.FigureTitle = "High-Frequency Injection Current Amplitude";
 Plot2.Ylabel = "Current [A]";
-Plot2.Xlabel = 'Time [ms]';
+Plot2.Xlabel = 'Time [s]';
 Plot2.Legend = {'HF Current Phase A', 'HF Current Phase B', 'HF Current Phase C'};
 Plot2.LocationLegend = 'NorthEast';
 Plot2.NumColumns = 1;
 Plot2.Datay = [DATA.IhaAmp DATA.IhbAmp DATA.IhcAmp];
 Plot2.Datax = [DATA.Time DATA.Time, DATA.Time];
+Plot2.XLim = [0 0.8];
 
 
 %% PLOT

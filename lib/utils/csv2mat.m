@@ -13,14 +13,14 @@ function DATA = csv2mat(filename)
        load(filenameMAT)
     else 
        disp ('File NOT found');
-       DATA = importfileHFamp(filenameCSV);
+       DATA = importfileCap(filenameCSV);
        metadata = dir(filenameCSV)
        save(filenameMAT, 'metadata', 'DATA');
     end
     
     if (metadata.bytes ~= dir(filenameCSV).bytes)
        disp ('File is Obsolete');
-       DATA = importfileHFamp(filenameCSV);
+       DATA = importfileCap(filenameCSV);
        metadata = dir(filenameCSV)
        save(filenameMAT, 'metadata', 'DATA');
     end
