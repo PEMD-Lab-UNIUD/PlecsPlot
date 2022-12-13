@@ -1,113 +1,113 @@
 function PLECSplot(Plot, Options)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+%PLECSplot(Plot, Options) Plots figures in a plecslike fashion
+%   Plot is a structure with all the plot specific data
+%   Options is a structure that contains all the style options
+    
+    ax = gca; 
+    setObjProperty(ax, Options.Axis);
 
-    for i=1:width(Plot.Datay)
-        p(i) = plot(Plot.Datax(:,i), Plot.Datay(:,i));
+    % Plot Trace
+    p = gobjects(width(Plot.Trace),1); 
 
-        if isfield(Plot,'Color')
-            p(i).Color = Plot.Color(i);
-        else
-            p(i).Color = Options.Color.Default(mod(i-1,length(Options.Color.Default))+1);
-        end
-        if isfield(Plot,'Style')
-            p(i).LineStyle = Plot.Style(i);
-        end
-        p(i).LineWidth = Options.LineWidth;
-        if isfield(Plot, 'Marker')
-            p(i).Marker = Plot.Marker(i);
-        end
+    for i=1:length(p)
+        p(i) = plot(Plot.Trace(i).X, Plot.Trace(i).Y);
         hold on; 
+        setObjProperty(p(i), Options.Style);
+        
+        if isfield(Plot.Trace(i), 'Style')
+            setObjProperty(p(i), Plot.Trace(i).Style);
+        end    
     end
-
-    grid on; grid minor;
-
-
- ax = gca; 
-
-%     fig = gcf;
-% ax = fig.CurrentAxes;
-
-    if isfield(Plot,'Note')
-%         [normx, normy] = coord2norm(ax, Plot.Note.XPosition, Plot.Note.YPosition);
-%         an = annotation(Plot.Note.Type, normx, normy, 'String', Plot.Note.Text);
-%         note = Annotate(ax, Plot.Note.Type, Plot.Note.XPosition, Plot.Note.YPosition, 'string', Plot.Note.Text);
-% for i=1:length(Plot.Note.XPosition)
-%  [normx(i), normy(i)] = normalize_coordinate(Plot.Note.XPosition(i), Plot.Note.YPosition(i), ax, get(gca, 'xlim'), get(gca, 'ylim'), 0, 0);
-% end
-%        an = annotation(Plot.Note.Type, normx, normy, 'String', Plot.Note.Text);
-
-% an = xyannotation(ax,'arrow', Plot.Note.XPosition, Plot.Note.YPosition)
-    end 
-
-    if isfield(Plot,'XLim')
-        ax.XLim = Plot.XLim;
-    end
-
-    if isfield(Plot,'YLim')
-        ax.YLim = Plot.YLim;
-    end 
     
-    if isfield(Plot,'Vline')
-        for i=1:length(Plot.Vline)
-            p(i) = plot([Plot.Vline(i), Plot.Vline(i)], [Plot.VlineLim(1), Plot.VlineLim(2)], Options.VlineStyle);
-            p(i).LineWidth = Options.LineWidth;
-            p(i).Color = Options.VlineColor;
-            hold on; 
+    % Plot horizontal line
+        if isfield(Plot,'Vline')
+        v = gobjects(width(Plot.Vline),1);
+        for i=1:length(v)
+            v(i) = plot([Plot.Vline(i).X, Plot.Vline(i).X], [Plot.Vline(i).Y]);
+            setObjProperty(v(i), Options.Line);
+            if isfield(Plot.Vline(i), 'Style')
+                setObjProperty(v(i), Plot.Vline(i).Style);
+            end    
         end
-    end 
-
+    end
+    
+    % Plot vertical line
     if isfield(Plot,'Hline')
-        for i=1:length(Plot.Hline)
-            p(i) = plot([Plot.HlineLim(1), Plot.HlineLim(2)], [Plot.Hline(i) Plot.Hline(i)], Options.HlineStyle);
-            p(i).LineWidth = Options.LineWidth;
-            p(i).Color = Options.HlineColor;
-            hold on; 
+        h = gobjects(width(Plot.Hline),1);
+        for i=1:length(h)
+            h(i) = plot(Plot.Hline(i).X, [Plot.Hline(i).Y, Plot.Hline(i).Y]);
+            setObjProperty(h(i), Options.Line);
+            if isfield(Plot.Hline(i), 'Style')
+                setObjProperty(h(i), Plot.Hline(i).Style);
+            end
         end
-    end 
-
-    if isfield(Plot,'XTick')
-        ax.XTick = Plot.XTick;
-    end
-
-    if isfield(Plot,'YTick')
-        ax.YTick = Plot.YTick;
-    end
-
-    if isfield(Plot,'XTickLabel')
-%         xticklab =  xticklabels(Plot.XTickLabel);
-        ax.XTickLabel = Plot.XTickLabel;
     end
     
-    ax.FontSize = Options.FontSizeTick;
-    ax.TickLabelInterpreter = Options.Interpreter;
+    grid on; grid minor;
+    
 
-    if isfield(Plot,'XTickLabel')
-        ax.XTickLabel = Plot.XTickLabel;
+
+    % set axis labels, ticks, ticklabels
+        
+    if isfield(Plot,'Axis')
+        setObjProperty(ax, Plot.Axis);
+        setObjProperty(ax, Options.Axis);
+    end
+    
+    if isfield(Plot,'XLabel')
+        xlab = xlabel(Plot.XLabel.String);
+        setObjProperty(xlab, Plot.XLabel);
+        setObjProperty(xlab, Options.Label);
+    end
+    
+    if isfield(Plot,'YLabel')
+        ylab = ylabel(Plot.YLabel.String);
+        setObjProperty(ylab, Plot.YLabel);
+        setObjProperty(ylab, Options.Label);
     end
 
-    ylab = ylabel(Plot.Ylabel);
-    ylab.Interpreter = Options.Interpreter;
-    ylab.FontSize =  Options.FontSizeLabel;
+     % set title
+    
+    if isfield(Plot,'Title')
+        tit = title(Plot.Title.String);
+        setObjProperty(tit, Plot.Title);
+        setObjProperty(tit, Options.Title);
+    end
 
-    xlab = xlabel(Plot.Xlabel);
-    xlab.Interpreter = Options.Interpreter;
-    xlab.FontSize =  Options.FontSizeLabel;
-    
-    
-    tit = title(Plot.FigureTitle);
-    tit.Interpreter = Options.Interpreter;
-    tit.FontSize = Options.FontSizeTitle;
+     % set legend
 
     if isfield(Plot,'Legend')
-        lgd = legend(Plot.Legend);
-        disp(Plot.Legend)
-        lgd.Location = Plot.LocationLegend;
-        lgd.Interpreter = Options.Interpreter;
-        lgd.FontSize = Options.FontSizeLegend;
-        lgd.NumColumns = Plot.NumColumns;
+        lgd = legend(Plot.Legend.String);
+        setObjProperty(lgd, Plot.Legend);
+        setObjProperty(lgd, Options.Legend);
     end
 
+    %set axis annotation
+    
+    if isfield(Plot,'Note')
+        for i=1:length(Plot.Note)
+            annotateXY(ax, Plot.Note(i), Options.Note)
+        end 
+    end
 
+    %set region fill
+    
+    if isfield(Plot,'Fill')
+        for i=1:length(Plot.Fill)
+            f(i) = fill(Plot.Fill(i).X, Plot.Fill(i).Y,Plot.Fill(i).Style.FaceColor);
+        if isfield(Plot.Fill(i), 'Style')
+            setObjProperty(f(i), Plot.Fill(i).Style);
+        end
+%             , Plot.Fill(i).Style.Color,'FaceAlpha',.5,'LineStyle',':');
+        end 
+    end
+
+    % set legend
+
+    if isfield(Plot,'Legend')
+        lgd = legend(Plot.Legend.String);
+        setObjProperty(lgd, Plot.Legend);
+        setObjProperty(lgd, Options.Legend);
+    end
 
 end

@@ -82,13 +82,13 @@ t = tiledlayout(3,1,'Padding','compact','TileSpacing','compact');
 t.Units = Options.Units;
 t.OuterPosition = [0 0 Options.Width Options.Height];
 nexttile;
-PLECSplot(Plot1, Options)
+PLECSplot_old(Plot1, Options)
 nexttile;
-PLECSplot(Plot2, Options)
+PLECSplot_old(Plot2, Options)
 nexttile;
-PLECSplot(Plot3, Options)
+PLECSplot_old(Plot3, Options)
 
 set(gcf, 'WindowState', 'maximized');
 
 %% SAVE
-plot2file(figure1, Options, ImageTitle);
+% plot2file(figure1, Options, ImageTitle);

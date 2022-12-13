@@ -109,6 +109,7 @@ else
     oldunits = get(axishandle, 'Units');
     set(axishandle, 'Units', 'Normalized');
     axisposition = get(axishandle, 'Position');
+%     axisposition = get(axishandle, 'InnerPosition');
     set(axishandle, 'Units', oldunits);
 end
 axislimits = axis(axishandle);

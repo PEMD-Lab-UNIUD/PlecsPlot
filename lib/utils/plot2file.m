@@ -1,7 +1,11 @@
 function plot2file(figure, Options, ImageTitle)
 %plot2file Saves png and fig files of the selected figure
-    exportgraphics(figure, ImageTitle+'.png','Resolution',Options.DPI)
-    exportgraphics(figure, ImageTitle+'.pdf','Resolution',Options.DPI)
-    exportgraphics(figure, ImageTitle+'.eps','Resolution',Options.DPI)
+
+    if ~exist('../Fig', 'dir')
+        mkdir('../Fig')
+    end  
+    
+    exportgraphics(figure, '..\Fig\'+ImageTitle+'.png','Resolution',Options.DPI)
+    exportgraphics(figure, '..\Fig\'+ImageTitle+'.pdf','ContentType','vector')
 %     savefig(ImageTitle+'.fig')
 end
