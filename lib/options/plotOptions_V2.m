@@ -1,9 +1,18 @@
 function Options = plotOptions_V2()
 %plotOptions gives a structure with all the Options fields
 
+%% Layout
+
+% Options.Columns = Columns;
+% Options.Rows = Rows;
+
+% if ~exist('annotationbox','var') || isempty(annotationbox)
+%   Options.Rows = Options.Rows;
+% end
+
     %% Defaults values
 
-    Interpreter = "none";
+    Interpreter = "Latex";
     Font = "Palatino Linotype";
 
     %% Export Options
@@ -49,13 +58,17 @@ function Options = plotOptions_V2()
 
     %% Default plot style
   
-    Options.Style.LineWidth = 3;
+    Options.Style.LineWidth = 5;
+
+%% Default area style
+                        
+   Options.Area.Style.FaceAlpha = 0.5;
     
     %% Default line style
 
     Options.Line.LineStyle = '--';
     Options.Line.Color = 'k';
-    Options.Line.LineWidth = 3;
+    Options.Line.LineWidth = 2;
 
     %% Default title Style
 
@@ -74,6 +87,9 @@ function Options = plotOptions_V2()
 
     Options.Legend.Interpreter = Interpreter;
     Options.Legend.FontSize = 20;
+    Options.Legend.AutoUpdate = 'off';
+    Options.Legend.Box = 'off';
+%     Options.Legend.Tag = 'legenda';
 
     %% Default annotation Style
 

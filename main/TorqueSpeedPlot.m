@@ -13,7 +13,11 @@ outputmode(true)
 
 %% Load Data 
 
-DATA = getData(filename);
+names = ["Time", "Omega_meRef", "Omega_meActual", "TemRef", "TemActual", "Tload"];
+
+opts = loadOptions(names);
+
+DATA = getData(filename, opts, 0);
 
 %% Plot parameter definition
 Options = plotOptions_V2();
@@ -25,13 +29,25 @@ ImageTitle = "SpeedTorque";
 Plot(1).Title.String = "Electromechanical Speed";
 
 Plot(1).Legend.String = {'Reference', 'Actual'};
-Plot(1).Legend.Location = 'NorthEast';
-Plot(1).Legend.NumColumns = 1;
+Plot(1).Legend.Style.Location = 'SouthEast';
+Plot(1).Legend.Style.NumColumns = 1;
 
-% Plot(1).Vline(1).X = 0.45;
-% Plot(1).Vline(1).Y = [-10 1000];
-% Plot(1).Vline(2).X = 0.5;
-% Plot(1).Vline(2).Y = [-10 1000];
+Plot(1).Vline(1).X = 0.01;
+Plot(1).Vline(1).Y = [-100 1500];
+Plot(1).Vline(2).X = 0.1;
+Plot(1).Vline(2).Y = [-100 1500];
+Plot(1).Vline(3).X = 0.2;
+Plot(1).Vline(3).Y = [-100 1500];
+Plot(1).Vline(4).X = 0.25;
+Plot(1).Vline(4).Y = [-100 1500];
+Plot(1).Vline(5).X = 0.3;
+Plot(1).Vline(5).Y = [-100 1500];
+Plot(1).Vline(6).X = 0.4;
+Plot(1).Vline(6).Y = [-100 1500];
+Plot(1).Vline(7).X = 0.5;
+Plot(1).Vline(7).Y = [-100 1500];
+Plot(1).Vline(8).X = 0.7;
+Plot(1).Vline(8).Y = [-100 1500];
 % 
 % Plot(1).Vline(1).Style.Color = "red";
 % 
@@ -61,7 +77,7 @@ Plot(1).Trace(2).X = Plot(1).Trace(1).X;
 Plot(1).YLabel.String= "Speed [rad/s]";
 Plot(1).XLabel.String = '';
 Plot(1).Axis.XTickLabel = '';
-Plot(1).Axis.YLim = [-50 1500];
+Plot(1).Axis.YLim = [-50 1300];
 Plot(1).Axis.XLim = [0 0.8];
 Plot(1).Axis.XScale = 'linear';
 Plot(1).Axis.YScale = 'linear';
@@ -70,12 +86,12 @@ Plot(1).Axis.YScale = 'linear';
 Plot(2).Title.String = "Electromechanical Torque";
 
 Plot(2).Legend.String = {'Reference', 'Actual', 'Load'};
-Plot(2).Legend.Location = 'NorthEast';
-Plot(2).Legend.NumColumns = 1;
+Plot(2).Legend.Style.Location = 'NorthEast';
+Plot(2).Legend.Style.NumColumns = 1;
 % Plot(2).Legend.Tag = "testtag";
 
 
-Plot(2).Trace(1).Style.Color = Options.Color.Blue;
+% Plot(2).Trace(1).Style.Color = Options.Color.Blue;
 % Plot(2).Trace(2).Style.Color = Options.Color.Blue;
 % Plot(2).Trace(3).Style.Color = Options.Color.Green;
 
@@ -95,9 +111,26 @@ Plot(2).Trace(1).X = DATA.Time;
 Plot(2).Trace(2).X = DATA.Time;
 Plot(2).Trace(3).X = DATA.Time;
 
+Plot(2).Vline(1).X = 0.01;
+Plot(2).Vline(1).Y = [-100 1500];
+Plot(2).Vline(2).X = 0.1;
+Plot(2).Vline(2).Y = [-100 1500];
+Plot(2).Vline(3).X = 0.2;
+Plot(2).Vline(3).Y = [-100 1500];
+Plot(2).Vline(4).X = 0.25;
+Plot(2).Vline(4).Y = [-100 1500];
+Plot(2).Vline(5).X = 0.3;
+Plot(2).Vline(5).Y = [-100 1500];
+Plot(2).Vline(6).X = 0.4;
+Plot(2).Vline(6).Y = [-100 1500];
+Plot(2).Vline(7).X = 0.5;
+Plot(2).Vline(7).Y = [-100 1500];
+Plot(2).Vline(8).X = 0.7;
+Plot(2).Vline(8).Y = [-100 1500];
+
 Plot(2).Axis.YTick = [0 20 40 60];
 Plot(2).Axis.YLim = [-5 65];
-Plot(2).Axis.XLimit = [0.05 0.8];
+Plot(2).Axis.XLim = [0 0.8];
 
 Plot(2).Axis.XScale = 'linear';
 % Plot(2).Axis.YScale = 'log';
@@ -120,16 +153,16 @@ Plot(2).XLabel.String = 'Time [s]';
 % Note(1).Style.Color  = 'Red';
 
 
-Note(1).Type = 'rectangle';
-Note(1).XPosition = [0.1 0.6];
-Note(1).YPosition = [50 40];
-Note(1).Text  = 'test array';
-Note(1).Style.LineStyle  = '-.';
-Note(1).Style.LineWidth  = 5;
-Note(1).Style.Color  = 'blue';
-Note(1).Style.FaceColor = 'red';
-Note(1).Style.FaceAlpha = .2;
-Note(1).Style.LineStyle = ':';
+% Note(1).Type = 'rectangle';
+% Note(1).XPosition = [0.1 0.6];
+% Note(1).YPosition = [50 40];
+% Note(1).Text  = 'test array';
+% Note(1).Style.LineStyle  = '-.';
+% Note(1).Style.LineWidth  = 5;
+% Note(1).Style.Color  = 'blue';
+% Note(1).Style.FaceColor = 'red';
+% Note(1).Style.FaceAlpha = .2;
+% Note(1).Style.LineStyle = ':';
 
 
 % % Note(3).Family = 3;
@@ -141,21 +174,21 @@ Note(1).Style.LineStyle = ':';
 % Note(3).Style.Color  = 'red';
 
 
-Plot(2).Note = Note;
+% Plot(2).Note = Note;
 
-t = (1/16:1/8:1)'*2*pi;
+% t = (1/16:1/8:1)'*2*pi;
 
-Plot(2).Fill(1).X = 0.5*cos(t);
-Plot(2).Fill(1).Y = 10*sin(t)+10;
-%Plot(2).Fill(1).Color = [0.8 0.7 0.8];
-Plot(2).Fill(1).Style.FaceColor = [0.8 0.7 1];
-Plot(2).Fill(1).Style.FaceAlpha = .5;
-Plot(2).Fill(1).Style.LineStyle = ':';
-
-Plot(2).Fill(2).X = 0.5*cos(t);
-Plot(2).Fill(2).Y = 10*sin(t)+10;
-%Plot(2).Fill(1).Color = [0.8 0.7 0.8];
-Plot(2).Fill(2).Style.FaceColor = [0.8 0.7 1];
+% Plot(2).Fill(1).X = 0.5*cos(t);
+% Plot(2).Fill(1).Y = 10*sin(t)+10;
+% %Plot(2).Fill(1).Color = [0.8 0.7 0.8];
+% Plot(2).Fill(1).Style.FaceColor = [0.8 0.7 1];
+% Plot(2).Fill(1).Style.FaceAlpha = .5;
+% Plot(2).Fill(1).Style.LineStyle = ':';
+% 
+% Plot(2).Fill(2).X = 0.5*cos(t);
+% Plot(2).Fill(2).Y = 10*sin(t)+10;
+% %Plot(2).Fill(1).Color = [0.8 0.7 0.8];
+% Plot(2).Fill(2).Style.FaceColor = [0.8 0.7 1];
 
 
 %% PLOT
@@ -171,4 +204,4 @@ for i=1:length(Plot)
 end
 
 %% SAVE
-plot2file(fig1, Options, ImageTitle);
+% plot2file(fig1, Options, ImageTitle);
