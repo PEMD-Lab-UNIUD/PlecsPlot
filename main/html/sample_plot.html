@@ -1,0 +1,762 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>sample_plot</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-12-30"><meta name="DC.source" content="sample_plot.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Data to plot</a></li><li><a href="#3">Plot parameter definition</a></li><li><a href="#4">PLOT TO FILE</a></li><li><a href="#5">PLOT 1</a></li><li><a href="#6">PLOT 2</a></li><li><a href="#7">PLOT 3</a></li><li><a href="#8">Plot 4 annotation</a></li><li><a href="#9">PLOT</a></li><li><a href="#10">SAVE</a></li></ul></div><pre class="codeinput">clc
+clear
+close <span class="string">all</span>
+
+filename =<span class="string">"TorqueSpeed"</span>;
+
+warning(<span class="string">'on'</span>,<span class="string">'all'</span>)
+debugmode(true)
+<span class="comment">% outputmode(false)</span>
+save2filemode(false)
+</pre><pre class="codeoutput">&lt;strong&gt; debugmode: &lt;/strong&gt;Debugging output is active
+&lt;strong&gt; save2filemode: &lt;/strong&gt;Saving output is inactive
+</pre><h2 id="2">Data to plot</h2><pre class="codeinput">x = linspace(0,10,100);
+
+y1 = sin(x);
+y2 = sin(2*x);
+y3 = cos(3*x);
+y4 = cos(4*x);
+</pre><h2 id="3">Plot parameter definition</h2><pre class="codeinput">Options = plotOptions_V2();
+</pre><h2 id="4">PLOT TO FILE</h2><pre class="codeinput">ImageTitle = <span class="string">"sample"</span>;
+</pre><h2 id="5">PLOT 1</h2><pre class="codeinput">Plot(1).Layout = [2 2];
+Plot(1).Title.String = <span class="string">"Example Title"</span>;
+
+<span class="comment">% Leave an empty string to skip a trace in the legend</span>
+Plot(1).Legend.String = {<span class="string">'Example Legend entry 1'</span>, <span class="string">''</span>, <span class="string">'Example Lengend entry 3'</span>};
+Plot(1).Legend.Style.Location = <span class="string">'east'</span>;
+Plot(1).Legend.Style.NumColumns = 1;
+
+Plot(1).Vline(1).X = 0.01;
+<span class="comment">% Plot(1).Vline(1).Y = [-inf inf];</span>
+Plot(1).Vline(2).X = 0.1;
+Plot(1).Vline(2).Y = [-100 1500];
+
+Plot(1).Vline(1).Style.Color = <span class="string">"red"</span>;
+Plot(1).Hline(1).X = [0 0.6];
+Plot(1).Hline(1).Y = 0.5;
+
+
+
+<span class="comment">% Plot(1).Trace(1).Style.Color = Options.Color.Red;</span>
+<span class="comment">% Plot(1).Trace(2).Style.Color = Options.Color.Blue;</span>
+
+<span class="comment">% Plot(1).Trace(1).Style.LineStyle = Options.LineStyle.Dashed;</span>
+<span class="comment">% Plot(1).Trace(2).Style.LineStyle = Options.LineStyle.Dashed;</span>
+<span class="comment">% Plot(1).Trace(3).Style.LineStyle = Options.LineStyle.Dashed;</span>
+
+<span class="comment">% Plot(1).Trace(1).Style.Marker = Options.Marker.Ast;</span>
+<span class="comment">% Plot(1).Trace(2).Style.Marker = Options.Marker.Circle;</span>
+Plot(1).Trace(3).Style.Marker = Options.Marker.Cross;
+Plot(1).Trace(3).Style.MarkerSize = 20;
+
+Plot(1).Trace(1).Y = y1;
+Plot(1).Trace(2).Y = y2;
+Plot(1).Trace(3).Y = y3;
+Plot(1).Trace(1).X = x;
+Plot(1).Trace(2).X = x;
+Plot(1).Trace(3).X = x;
+
+Plot(1).YLabel.String= <span class="string">"Sample Ylabel"</span>;
+Plot(1).XLabel.String = <span class="string">''</span>;
+<span class="comment">% Plot(1).Axis.XTickLabel = '';</span>
+Plot(1).Axis.YLim = [ ];
+Plot(1).Axis.XLim = [ ];
+Plot(1).Axis.XLim = [1 9 ];
+Plot(1).Axis.XScale = <span class="string">'linear'</span>;
+Plot(1).Axis.YScale = <span class="string">'linear'</span>;
+
+Plot(1).Axis.XGrid = <span class="string">'on'</span>;
+Plot(1).Axis.YGrid = <span class="string">'on'</span>;
+
+Plot(1).Axis.XMinorGrid = <span class="string">'on'</span>;
+Plot(1).Axis.YMinorGrid = <span class="string">'on'</span>;
+</pre><h2 id="6">PLOT 2</h2><pre class="codeinput">Plot(2).Rows = 2;
+Plot(2).Columns = 3;
+Plot(2).Layout = [4 2];
+Plot(2).Title.String = <span class="string">"GRANDE"</span>;
+
+Plot(2).Legend.String = {<span class="string">'Example Legend'</span>};
+Plot(2).Legend.Style.Location = <span class="string">'NorthEast'</span>;
+Plot(2).Legend.Style.NumColumns = 1;
+
+
+Plot(2).Trace(1).Y = y1;
+Plot(2).Trace(2).Y = y2;
+Plot(2).Trace(3).Y = y3;
+Plot(2).Trace(1).X = x;
+Plot(2).Trace(2).X = x;
+Plot(2).Trace(3).X = x;
+
+Plot(2).YLabel.String = <span class="string">"Sample Ylabel"</span>;
+Plot(2).XLabel.String = <span class="string">''</span>;
+
+Plot(2).Axis.XLim = [1 9 ];
+
+Plot(2).Zoom(1).X = [2 5];
+Plot(2).Zoom(1).Y = [0.7 0];
+Plot(2).Zoom(1).XPosition = [6 8];
+Plot(2).Zoom(1).YPosition = [0.7 -0.5];
+
+Plot(2).Axis.XGrid = <span class="string">'on'</span>;
+Plot(2).Axis.YGrid = <span class="string">'on'</span>;
+
+<span class="comment">% Plot(2).Axis.XMinorGrid = 'on';</span>
+<span class="comment">% Plot(2).Axis.YMinorGrid = 'on';</span>
+
+
+
+<span class="comment">% Plot(2).Axis.YTick = [ ];</span>
+<span class="comment">% Plot(2).Axis.YLim = [ ];</span>
+<span class="comment">% Plot(2).Axis.XLim = [ ];</span>
+
+
+<span class="comment">% Note(1).Type = 'textbox';</span>
+<span class="comment">% Note(1).XPosition = [0.3 0.6];</span>
+<span class="comment">% Note(1).YPosition = [60 40];</span>
+<span class="comment">% Note(1).Text  = 'test array';</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% Note(1).Style.FitBoxToText  = 'on';</span>
+<span class="comment">% Note(1).Style.LineStyle  = 'none';</span>
+<span class="comment">% Note(1).Style.Color  = 'Red';</span>
+
+
+<span class="comment">% Note(1).Type = 'rectangle';</span>
+
+<span class="comment">% Note(1).Text  = 'test array';</span>
+<span class="comment">% Note(1).Style.LineStyle  = '-.';</span>
+<span class="comment">% Note(1).Style.LineWidth  = 5;</span>
+<span class="comment">% Note(1).Style.Color  = 'blue';</span>
+<span class="comment">% Note(1).Style.FaceColor = 'red';</span>
+<span class="comment">% Note(1).Style.FaceAlpha = .2;</span>
+<span class="comment">% Note(1).Style.LineStyle = ':';</span>
+
+
+<span class="comment">% % Note(3).Family = 3;</span>
+<span class="comment">% Note(3).Type = 'textarrow';</span>
+<span class="comment">% Note(3).XPosition = [0.6 0.3];</span>
+<span class="comment">% Note(3).YPosition = [30 60];</span>
+<span class="comment">% Note(3).Text  = 'test array arrow';</span>
+<span class="comment">% Note(3).Style.LineStyle  = '--';</span>
+<span class="comment">% Note(3).Style.Color  = 'red';</span>
+
+
+<span class="comment">% Plot(2).Note = Note;</span>
+
+<span class="comment">% t = (1/16:1/8:1)'*2*pi;</span>
+
+<span class="comment">% Plot(2).Fill(1).X = 0.5*cos(t);</span>
+<span class="comment">% Plot(2).Fill(1).Y = 10*sin(t)+10;</span>
+<span class="comment">% Plot(2).Fill(1).Style.FaceColor = [0.8 0.7 1];</span>
+<span class="comment">% Plot(2).Fill(1).Style.FaceAlpha = .5;</span>
+<span class="comment">% Plot(2).Fill(1).Style.LineStyle = ':';</span>
+<span class="comment">%</span>
+<span class="comment">% Plot(2).Fill(2).X = 0.5*cos(t);</span>
+<span class="comment">% Plot(2).Fill(2).Y = 10*sin(t)+10;</span>
+<span class="comment">% Plot(2).Fill(2).Style.FaceColor = [0.8 0.7 1];</span>
+</pre><h2 id="7">PLOT 3</h2><pre class="codeinput">Plot(3).Rows = 2;
+Plot(3).Columns = 3;
+Plot(3).Layout = [2 2];
+Plot(3).Title.String = <span class="string">"Example Title"</span>;
+
+Plot(3).Legend.String = {<span class="string">'Example Legend'</span>};
+Plot(3).Legend.Style.Location = <span class="string">'NorthEast'</span>;
+Plot(3).Legend.Style.NumColumns = 1;
+
+Plot(3).Trace(1).Y = y1;
+Plot(3).Trace(2).Y = y2;
+Plot(3).Trace(3).Y = y3;
+Plot(3).Trace(1).X = x;
+Plot(3).Trace(2).X = x;
+Plot(3).Trace(3).X = x;
+
+Plot(3).Area(1).Y = y1;
+Plot(3).Area(1).X = x;
+Plot(3).Area(1).Style.FaceColor = Options.Color.Green;
+
+
+
+Plot(3).YLabel.String = <span class="string">"Sample Ylabel"</span>;
+Plot(3).XLabel.String = <span class="string">''</span>;
+
+Plot(3).Axis.XLim = [1 9 ];
+
+<span class="comment">% Plot(3).Zoom(1).X = [2 5];</span>
+<span class="comment">% Plot(3).Zoom(1).Y = [0.7 0];</span>
+<span class="comment">% Plot(3).Zoom(1).XPosition = [6 8];</span>
+<span class="comment">% Plot(3).Zoom(1).YPosition = [0.7 -0.5];</span>
+
+Plot(3).Axis.XGrid = <span class="string">'on'</span>;
+Plot(3).Axis.YGrid = <span class="string">'on'</span>;
+</pre><h2 id="8">Plot 4 annotation</h2><pre class="codeinput">Plot(4).Rows = 1;
+Plot(4).Columns = 1;
+Plot(4).Layout = <span class="string">'south'</span>;
+
+<span class="comment">% Plot(3).Title.String = "annotation space";</span>
+
+<span class="comment">% Plot(3).Legend.String = {'Example Legend'};</span>
+<span class="comment">% Plot(3).Legend.Style.Location = 'NorthEast';</span>
+<span class="comment">% Plot(3).Legend.Style.NumColumns = 1;</span>
+
+
+Plot(4).Trace(1).Y = y1;
+Plot(4).Trace(1).X = x;
+Plot(4).Trace(1).Style.LineStyle = Options.LineStyle.None;
+
+Plot(4).Axis.YLim = [0 1];
+Plot(4).Axis.XLim = [1 9];
+Plot(4).YLabel.String = <span class="string">''</span>;
+Plot(4).XLabel.String = <span class="string">''</span>;
+Plot(4).Axis.XTickLabel = <span class="string">''</span>;
+Plot(4).Axis.YTickLabel = <span class="string">''</span>;
+Plot(4).Axis.Box=<span class="string">'off'</span>;
+Plot(4).Axis.XColor=<span class="string">'none'</span>;
+Plot(4).Axis.YColor=<span class="string">'none'</span>;
+
+
+<span class="comment">% Plot(3).YLabel.String = "Sample Ylabel";</span>
+<span class="comment">% Plot(3).XLabel.String = '';</span>
+
+<span class="comment">% Plot(3).Zoom(1).X = [2 5];</span>
+<span class="comment">% Plot(3).Zoom(1).Y = [0.7 0];</span>
+<span class="comment">% Plot(3).Zoom(1).XPosition = [6 8];</span>
+<span class="comment">% Plot(3).Zoom(1).YPosition = [0.7 -0.5];</span>
+
+Plot(4).Note(1).Type = <span class="string">'rectangle'</span>;
+Plot(4).Note(1).XPosition = [2 7];
+Plot(4).Note(1).YPosition = [0.5 0];
+<span class="comment">% Plot(3).Note(1).Text  = 'test array';</span>
+Plot(4).Note(1).Style.FitBoxToText  = <span class="string">'on'</span>;
+<span class="comment">% Plot(3).Note(1).Style.LineStyle  = 'none';</span>
+Plot(4).Note(1).Style.Color  = <span class="string">'Red'</span>;
+
+
+<span class="comment">% Plot(3) = Plot(1);</span>
+
+<span class="comment">% Plot = Plot(1:3);</span>
+</pre><h2 id="9">PLOT</h2><pre class="codeinput">fig1 = figure(<span class="string">'Name'</span>, ImageTitle, <span class="string">'WindowState'</span>, <span class="string">'maximized'</span>);
+drawnow;
+layout = [0 0];
+
+<span class="keyword">for</span> i=1:length(Plot)
+    <span class="keyword">if</span> isnumeric(Plot(i).Layout)
+layout = layout + Plot(i).Layout;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+t = tiledlayout(4, 4,<span class="string">'Padding'</span>,<span class="string">'tight'</span>,<span class="string">'TileSpacing'</span>,<span class="string">'tight'</span>); <span class="comment">%tight</span>
+t.Units = Options.Units;
+t.OuterPosition = [0 0 Options.Width Options.Height];
+
+<span class="keyword">for</span> i=1:length(Plot)
+  axes(i) = nexttile(t, Plot(i).Layout);
+  PLECSplot(Plot(i), Options)
+<span class="keyword">end</span>
+
+
+<span class="comment">%   nexttile(t, [3,1]);</span>
+<span class="comment">%   PLECSplot(Plot(1), Options)</span>
+<span class="comment">%   nexttile(t, [3,1]);</span>
+<span class="comment">% PLECSplot(Plot(2), Options)</span>
+<span class="comment">%   nexttile(t, [1,1]);</span>
+<span class="comment">% PLECSplot(Plot(3), Options)</span>
+
+<span class="comment">% linkaxes(axes, 'x') % Options: x, y, xy, off</span>
+</pre><pre class="codeoutput">&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                ColorOrder 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter      TickLabelInterpreter 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                           	 of object     matlab.graphics.chart.primitive.Line 	  &lt;strong&gt;IS EMPTY&lt;/strong&gt;
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                           	 of object     matlab.graphics.chart.primitive.Line 	  &lt;strong&gt;IS EMPTY&lt;/strong&gt;
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    Marker 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                MarkerSize 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  Location 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                NumColumns 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                AutoUpdate 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                       Box 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineStyle 	 of object matlab.graphics.chart.decoration.ConstantLine 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     Color 	 of object matlab.graphics.chart.decoration.ConstantLine 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object matlab.graphics.chart.decoration.ConstantLine 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     Color 	 of object matlab.graphics.chart.decoration.ConstantLine 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineStyle 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     Color 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                           	 of object     matlab.graphics.chart.primitive.Line 	  &lt;strong&gt;IS EMPTY&lt;/strong&gt;
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineStyle 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     Color 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                      YLim 	 of object                matlab.graphics.axis.Axes 	 &lt;strong&gt; NOT EXSITS&lt;/strong&gt; 
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                      XLim 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    XScale 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    YScale 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     XGrid 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     YGrid 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                XMinorGrid 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                YMinorGrid 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                ColorOrder 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter      TickLabelInterpreter 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontName 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                ColorOrder 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter      TickLabelInterpreter 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  Location 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                NumColumns 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                AutoUpdate 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                       Box 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                      XLim 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     XGrid 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     YGrid 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                ColorOrder 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter      TickLabelInterpreter 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontName 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                ColorOrder 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter      TickLabelInterpreter 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                ColorOrder 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter      TickLabelInterpreter 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  Location 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                NumColumns 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                AutoUpdate 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                       Box 	 of object      matlab.graphics.illustration.Legend 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 FaceAlpha 	 of object     matlab.graphics.chart.primitive.Area 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 FaceColor 	 of object     matlab.graphics.chart.primitive.Area 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                      XLim 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     XGrid 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     YGrid 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                ColorOrder 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter      TickLabelInterpreter 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontName 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                ColorOrder 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter      TickLabelInterpreter 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineWidth 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                 LineStyle 	 of object     matlab.graphics.chart.primitive.Line 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                      YLim 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                      XLim 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                XTickLabel 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                YTickLabel 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                       Box 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    XColor 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    YColor 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                ColorOrder 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter      TickLabelInterpreter 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object                matlab.graphics.axis.Axes 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                    String 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter               Interpreter 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                  FontSize 	 of object           matlab.graphics.primitive.Text 	  modified succesfully  
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter              FitBoxToText 	 of object          matlab.graphics.shape.Rectangle 	 &lt;strong&gt; NOT EXSITS&lt;/strong&gt; 
+&lt;strong&gt; setObjProperty: &lt;/strong&gt;Parameter                     Color 	 of object          matlab.graphics.shape.Rectangle 	  modified succesfully  
+</pre><img vspace="5" hspace="5" src="sample_plot_01.png" alt=""> <h2 id="10">SAVE</h2><pre class="codeinput">plot2file(fig1, Options, ImageTitle);
+</pre><pre class="codeoutput">&lt;strong&gt; plot2file: &lt;/strong&gt;Disabled File output of Figure sample
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clc
+clear
+close all
+
+filename ="TorqueSpeed";
+
+warning('on','all')
+debugmode(true)
+% outputmode(false)
+save2filemode(false)
+
+
+%% Data to plot
+
+x = linspace(0,10,100);
+
+y1 = sin(x);
+y2 = sin(2*x);
+y3 = cos(3*x);
+y4 = cos(4*x);
+
+
+%% Plot parameter definition
+Options = plotOptions_V2();
+
+%% PLOT TO FILE
+ImageTitle = "sample";
+
+%% PLOT 1
+Plot(1).Layout = [2 2];
+Plot(1).Title.String = "Example Title";
+
+% Leave an empty string to skip a trace in the legend
+Plot(1).Legend.String = {'Example Legend entry 1', '', 'Example Lengend entry 3'};
+Plot(1).Legend.Style.Location = 'east';
+Plot(1).Legend.Style.NumColumns = 1;
+
+Plot(1).Vline(1).X = 0.01;
+% Plot(1).Vline(1).Y = [-inf inf];
+Plot(1).Vline(2).X = 0.1;
+Plot(1).Vline(2).Y = [-100 1500];
+
+Plot(1).Vline(1).Style.Color = "red"; 
+Plot(1).Hline(1).X = [0 0.6];
+Plot(1).Hline(1).Y = 0.5;
+
+
+
+% Plot(1).Trace(1).Style.Color = Options.Color.Red;
+% Plot(1).Trace(2).Style.Color = Options.Color.Blue;
+
+% Plot(1).Trace(1).Style.LineStyle = Options.LineStyle.Dashed;
+% Plot(1).Trace(2).Style.LineStyle = Options.LineStyle.Dashed;
+% Plot(1).Trace(3).Style.LineStyle = Options.LineStyle.Dashed;
+
+% Plot(1).Trace(1).Style.Marker = Options.Marker.Ast;
+% Plot(1).Trace(2).Style.Marker = Options.Marker.Circle;
+Plot(1).Trace(3).Style.Marker = Options.Marker.Cross;
+Plot(1).Trace(3).Style.MarkerSize = 20;
+
+Plot(1).Trace(1).Y = y1;
+Plot(1).Trace(2).Y = y2;
+Plot(1).Trace(3).Y = y3;
+Plot(1).Trace(1).X = x;
+Plot(1).Trace(2).X = x;
+Plot(1).Trace(3).X = x;
+
+Plot(1).YLabel.String= "Sample Ylabel";
+Plot(1).XLabel.String = '';
+% Plot(1).Axis.XTickLabel = '';
+Plot(1).Axis.YLim = [ ];
+Plot(1).Axis.XLim = [ ];
+Plot(1).Axis.XLim = [1 9 ];
+Plot(1).Axis.XScale = 'linear';
+Plot(1).Axis.YScale = 'linear';
+
+Plot(1).Axis.XGrid = 'on';
+Plot(1).Axis.YGrid = 'on';
+
+Plot(1).Axis.XMinorGrid = 'on';
+Plot(1).Axis.YMinorGrid = 'on';
+
+%% PLOT 2
+Plot(2).Rows = 2;
+Plot(2).Columns = 3;
+Plot(2).Layout = [4 2];
+Plot(2).Title.String = "GRANDE";
+
+Plot(2).Legend.String = {'Example Legend'};
+Plot(2).Legend.Style.Location = 'NorthEast';
+Plot(2).Legend.Style.NumColumns = 1;
+
+
+Plot(2).Trace(1).Y = y1;
+Plot(2).Trace(2).Y = y2;
+Plot(2).Trace(3).Y = y3;
+Plot(2).Trace(1).X = x;
+Plot(2).Trace(2).X = x;
+Plot(2).Trace(3).X = x;
+
+Plot(2).YLabel.String = "Sample Ylabel";
+Plot(2).XLabel.String = '';
+
+Plot(2).Axis.XLim = [1 9 ];
+
+Plot(2).Zoom(1).X = [2 5];
+Plot(2).Zoom(1).Y = [0.7 0];
+Plot(2).Zoom(1).XPosition = [6 8];
+Plot(2).Zoom(1).YPosition = [0.7 -0.5];
+
+Plot(2).Axis.XGrid = 'on';
+Plot(2).Axis.YGrid = 'on';
+
+% Plot(2).Axis.XMinorGrid = 'on';
+% Plot(2).Axis.YMinorGrid = 'on';
+
+
+
+% Plot(2).Axis.YTick = [ ];
+% Plot(2).Axis.YLim = [ ];
+% Plot(2).Axis.XLim = [ ];
+
+
+% Note(1).Type = 'textbox';
+% Note(1).XPosition = [0.3 0.6];
+% Note(1).YPosition = [60 40];
+% Note(1).Text  = 'test array';
+% 
+% 
+% Note(1).Style.FitBoxToText  = 'on';
+% Note(1).Style.LineStyle  = 'none';
+% Note(1).Style.Color  = 'Red';
+
+
+% Note(1).Type = 'rectangle';
+
+% Note(1).Text  = 'test array';
+% Note(1).Style.LineStyle  = '-.';
+% Note(1).Style.LineWidth  = 5;
+% Note(1).Style.Color  = 'blue';
+% Note(1).Style.FaceColor = 'red';
+% Note(1).Style.FaceAlpha = .2;
+% Note(1).Style.LineStyle = ':';
+
+
+% % Note(3).Family = 3;
+% Note(3).Type = 'textarrow';
+% Note(3).XPosition = [0.6 0.3];
+% Note(3).YPosition = [30 60];
+% Note(3).Text  = 'test array arrow';
+% Note(3).Style.LineStyle  = 'REPLACE_WITH_DASH_DASH';
+% Note(3).Style.Color  = 'red';
+
+
+% Plot(2).Note = Note;
+
+% t = (1/16:1/8:1)'*2*pi;
+
+% Plot(2).Fill(1).X = 0.5*cos(t);
+% Plot(2).Fill(1).Y = 10*sin(t)+10;
+% Plot(2).Fill(1).Style.FaceColor = [0.8 0.7 1];
+% Plot(2).Fill(1).Style.FaceAlpha = .5;
+% Plot(2).Fill(1).Style.LineStyle = ':';
+% 
+% Plot(2).Fill(2).X = 0.5*cos(t);
+% Plot(2).Fill(2).Y = 10*sin(t)+10;
+% Plot(2).Fill(2).Style.FaceColor = [0.8 0.7 1];
+
+
+%% PLOT 3
+Plot(3).Rows = 2;
+Plot(3).Columns = 3;
+Plot(3).Layout = [2 2];
+Plot(3).Title.String = "Example Title";
+
+Plot(3).Legend.String = {'Example Legend'};
+Plot(3).Legend.Style.Location = 'NorthEast';
+Plot(3).Legend.Style.NumColumns = 1;
+
+Plot(3).Trace(1).Y = y1;
+Plot(3).Trace(2).Y = y2;
+Plot(3).Trace(3).Y = y3;
+Plot(3).Trace(1).X = x;
+Plot(3).Trace(2).X = x;
+Plot(3).Trace(3).X = x;
+
+Plot(3).Area(1).Y = y1;
+Plot(3).Area(1).X = x;
+Plot(3).Area(1).Style.FaceColor = Options.Color.Green;
+
+
+
+Plot(3).YLabel.String = "Sample Ylabel";
+Plot(3).XLabel.String = '';
+
+Plot(3).Axis.XLim = [1 9 ];
+
+% Plot(3).Zoom(1).X = [2 5];
+% Plot(3).Zoom(1).Y = [0.7 0];
+% Plot(3).Zoom(1).XPosition = [6 8];
+% Plot(3).Zoom(1).YPosition = [0.7 -0.5];
+
+Plot(3).Axis.XGrid = 'on';
+Plot(3).Axis.YGrid = 'on';
+
+%% Plot 4 annotation
+Plot(4).Rows = 1;
+Plot(4).Columns = 1;
+Plot(4).Layout = 'south';
+
+% Plot(3).Title.String = "annotation space";
+
+% Plot(3).Legend.String = {'Example Legend'};
+% Plot(3).Legend.Style.Location = 'NorthEast';
+% Plot(3).Legend.Style.NumColumns = 1;
+
+
+Plot(4).Trace(1).Y = y1;
+Plot(4).Trace(1).X = x;
+Plot(4).Trace(1).Style.LineStyle = Options.LineStyle.None;
+
+Plot(4).Axis.YLim = [0 1];
+Plot(4).Axis.XLim = [1 9];
+Plot(4).YLabel.String = '';
+Plot(4).XLabel.String = '';
+Plot(4).Axis.XTickLabel = '';
+Plot(4).Axis.YTickLabel = '';
+Plot(4).Axis.Box='off';
+Plot(4).Axis.XColor='none';
+Plot(4).Axis.YColor='none';
+
+
+% Plot(3).YLabel.String = "Sample Ylabel";
+% Plot(3).XLabel.String = '';
+
+% Plot(3).Zoom(1).X = [2 5];
+% Plot(3).Zoom(1).Y = [0.7 0];
+% Plot(3).Zoom(1).XPosition = [6 8];
+% Plot(3).Zoom(1).YPosition = [0.7 -0.5];
+
+Plot(4).Note(1).Type = 'rectangle';
+Plot(4).Note(1).XPosition = [2 7];
+Plot(4).Note(1).YPosition = [0.5 0];
+% Plot(3).Note(1).Text  = 'test array';
+Plot(4).Note(1).Style.FitBoxToText  = 'on';
+% Plot(3).Note(1).Style.LineStyle  = 'none';
+Plot(4).Note(1).Style.Color  = 'Red';
+
+
+% Plot(3) = Plot(1);
+
+% Plot = Plot(1:3);
+
+%% PLOT
+fig1 = figure('Name', ImageTitle, 'WindowState', 'maximized'); 
+drawnow;
+layout = [0 0];
+
+for i=1:length(Plot)
+    if isnumeric(Plot(i).Layout)
+layout = layout + Plot(i).Layout;
+    end
+end 
+
+
+t = tiledlayout(4, 4,'Padding','tight','TileSpacing','tight'); %tight
+t.Units = Options.Units;
+t.OuterPosition = [0 0 Options.Width Options.Height];
+
+for i=1:length(Plot)
+  axes(i) = nexttile(t, Plot(i).Layout);
+  PLECSplot(Plot(i), Options)
+end
+
+
+%   nexttile(t, [3,1]);
+%   PLECSplot(Plot(1), Options)
+%   nexttile(t, [3,1]);
+% PLECSplot(Plot(2), Options)
+%   nexttile(t, [1,1]);
+% PLECSplot(Plot(3), Options)
+
+% linkaxes(axes, 'x') % Options: x, y, xy, off
+
+
+%% SAVE
+plot2file(fig1, Options, ImageTitle);
+##### SOURCE END #####
+--></body></html>
